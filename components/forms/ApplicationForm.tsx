@@ -46,7 +46,7 @@ export const applicationPageClasses = {
 } as const;
 
 const INPUT_CLASS =
-  'w-full rounded-md border border-accent/12 bg-white/5 px-4 py-3.5 text-[15px] text-ink outline-none transition placeholder:text-ink-dim/50 hover:border-accent/30 focus:border-accent focus:bg-accent/10 focus:shadow-[0_0_0_3px_rgba(29,201,183,0.1)] max-[640px]:px-3.5 max-[640px]:py-3 max-[640px]:text-sm';
+  'w-full rounded-md border border-accent/12 bg-white/5 px-4 py-3.5 text-[15px] text-ink outline-none transition placeholder:text-ink-dim/50 hover:border-accent/30 focus:border-accent focus:bg-accent/10 focus:shadow-[0_0_0_3px_rgba(220,109,11,0.1)] max-[640px]:px-3.5 max-[640px]:py-3 max-[640px]:text-sm';
 
 export function FormInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return <input {...props} className={`${INPUT_CLASS} ${props.className ?? ''}`} />;
@@ -358,7 +358,7 @@ export function SubmitBar({
     ? 'from-gold to-[#D97706] text-night shadow-[0_4px_15px_rgba(251,191,36,0.3)] hover:shadow-[0_8px_25px_rgba(251,191,36,0.4)]'
     : tone === 'danger'
       ? 'from-danger to-[#dc2626] text-white hover:shadow-[0_10px_30px_rgba(239,68,68,0.3)]'
-      : 'from-accent to-accent-dark text-black hover:shadow-[0_10px_30px_rgba(29,201,183,0.3)]';
+      : 'from-accent to-accent-dark text-black hover:shadow-[0_10px_30px_rgba(220,109,11,0.3)]';
 
   return (
     <button

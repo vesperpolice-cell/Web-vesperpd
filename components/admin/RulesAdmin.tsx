@@ -166,7 +166,7 @@ export function RuleFormModal({
           onChange={(e) => setCategory(e.target.value)}
           list={listId}
           placeholder="พิมพ์ประเภทเอง เช่น กฎทั่วไป..."
-          className="w-full rounded-lg border border-[#333] bg-[#0a0f1e] px-3 py-2.5 font-thai text-sm text-white outline-none focus:border-[#f77f07]"
+          className="w-full rounded-lg border border-[#333] bg-[#0a0a0a] px-3 py-2.5 font-thai text-sm text-white outline-none focus:border-[#f77f07]"
         />
         <datalist id={listId}>
           {categories.map((c) => (
@@ -178,7 +178,7 @@ export function RuleFormModal({
       <div className="mb-4">
         <label className="mb-1.5 block text-xs font-semibold text-ink-dim">เนื้อหา / Text</label>
 
-        <div className="mb-1.5 flex items-center gap-1.5 rounded-lg border border-[#333] bg-[#0a0f1e] px-2.5 py-1.5">
+        <div className="mb-1.5 flex items-center gap-1.5 rounded-lg border border-[#333] bg-[#0a0a0a] px-2.5 py-1.5">
           <button
             type="button"
             onClick={() => setBoldOn((v) => !v)}
@@ -225,7 +225,7 @@ export function RuleFormModal({
           onChange={(e) => setText(e.target.value)}
           placeholder="กรอกเนื้อหา..."
           rows={5}
-          className="w-full resize-y rounded-lg border border-[#333] bg-[#0a0f1e] px-3 py-2.5 font-thai text-sm text-white outline-none focus:border-[#f77f07]"
+          className="w-full resize-y rounded-lg border border-[#333] bg-[#0a0a0a] px-3 py-2.5 font-thai text-sm text-white outline-none focus:border-[#f77f07]"
         />
       </div>
 
@@ -240,7 +240,7 @@ export function RuleFormModal({
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               placeholder="0"
-              className="w-full rounded-lg border border-[#333] bg-[#0a0f1e] px-3 py-2.5 text-sm text-white outline-none focus:border-[#f77f07]"
+              className="w-full rounded-lg border border-[#333] bg-[#0a0a0a] px-3 py-2.5 text-sm text-white outline-none focus:border-[#f77f07]"
             />
           </div>
           <div>
@@ -250,7 +250,7 @@ export function RuleFormModal({
               value={time}
               onChange={(e) => setTime(e.target.value)}
               placeholder="0"
-              className="w-full rounded-lg border border-[#333] bg-[#0a0f1e] px-3 py-2.5 text-sm text-white outline-none focus:border-[#f77f07]"
+              className="w-full rounded-lg border border-[#333] bg-[#0a0a0a] px-3 py-2.5 text-sm text-white outline-none focus:border-[#f77f07]"
             />
           </div>
         </div>

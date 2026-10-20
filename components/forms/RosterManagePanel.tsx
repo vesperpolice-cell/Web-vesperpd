@@ -59,7 +59,7 @@ function statusText(status: string): string {
   return status;
 }
 
-const stripTag = (name: string) => name.replace(/\[MHNK-PD\]/g, '');
+const stripTag = (name: string) => name.replace(/\[VES-PD\]/g, '');
 
 /**
  * One table's worth of ticking.
@@ -446,7 +446,7 @@ export function RosterManagePanel() {
         <BackHome className="mb-2" />
         <h1>📋 จัดการสถานะสมาชิก</h1>
         <p className="subtitle">
-          MHNK Police Department — ดูสถานะ / เปลี่ยนสถานะ / ย้ายออกจากระบบ
+          VES-PD Police Department — ดูสถานะ / เปลี่ยนสถานะ / ย้ายออกจากระบบ
         </p>
 
         <PageToast toast={toast} />

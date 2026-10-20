@@ -283,7 +283,7 @@ export function RegisterForm() {
             <div className={c.header}>
               <div className={c.headerIcon}>⚖</div>
               <h2 className={c.headerTitle}>สมัครเป็นตำรวจ</h2>
-              <p className={c.headerDesc}>กรอกข้อมูลด้านล่างเพื่อสมัครเข้าร่วมกรมตำรวจ MHNK</p>
+              <p className={c.headerDesc}>กรอกข้อมูลด้านล่างเพื่อสมัครเข้าร่วมกรมตำรวจ VES-PD</p>
             </div>
 
             <DiscordConnectPanel auth={auth} />

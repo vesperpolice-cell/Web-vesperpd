@@ -22,7 +22,7 @@ export default function LogsError({
 }) {
   return (
     <main className="flex min-h-screen flex-1 items-center justify-center px-4 py-10">
-      <div className="w-full max-w-lg rounded-[16px] border border-danger/30 bg-[rgba(17,24,39,0.85)] p-7">
+      <div className="w-full max-w-lg rounded-[16px] border border-danger/30 bg-[rgba(20,20,20,0.85)] p-7">
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-danger/30 bg-danger/10 text-2xl">
           ⚠️
         </div>

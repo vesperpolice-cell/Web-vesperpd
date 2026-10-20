@@ -4,7 +4,7 @@ import { ProfileClient } from '@/components/profile/ProfileClient';
 import { Loading } from '@/components/ui/States';
 
 export const metadata: Metadata = {
-  title: 'ประวัติเจ้าหน้าที่ - MHNK Police Department',
+  title: 'ประวัติเจ้าหน้าที่ - VES-PD Police Department',
 };
 
 export default function ProfilePage() {

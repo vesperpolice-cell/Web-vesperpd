@@ -30,7 +30,7 @@ export function RulesLinkView() {
           href={RULES_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-7 inline-flex items-center gap-2 rounded-lg bg-accent px-7 py-3 text-sm font-bold text-night transition hover:-translate-y-px hover:bg-accent-dark hover:shadow-[0_8px_24px_rgba(29,201,183,0.25)]"
+          className="mt-7 inline-flex items-center gap-2 rounded-lg bg-accent px-7 py-3 text-sm font-bold text-night transition hover:-translate-y-px hover:bg-accent-dark hover:shadow-[0_8px_24px_rgba(220,109,11,0.25)]"
         >
           เปิดหน้ากฎตำรวจ
           <span aria-hidden>↗</span>

@@ -3,7 +3,7 @@ import { RosterManagePanel } from '@/components/forms/RosterManagePanel';
 import './rostermanage.css';
 
 export const metadata: Metadata = {
-  title: 'จัดการสถานะ - MHNK Police Department',
+  title: 'จัดการสถานะ - VES-PD Police Department',
 };
 
 export default function RosterManagePage() {

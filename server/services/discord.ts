@@ -137,8 +137,8 @@ function registrationEmbed(data: RegistrationData, editCount = 0) {
 
   const embed: Embed = {
     title: '🚔 ใบสมัครตำรวจใหม่',
-    description: 'มีผู้สมัครเข้าร่วมกรมตำรวจ MHNK',
-    color: 0x1dc9b7,
+    description: 'มีผู้สมัครเข้าร่วมกรมตำรวจ VES-PD',
+    color: 0xdc6d0b,
     fields: [
       { name: '👤 ชื่อ เล่น IC', value: data.ocName || 'ไม่ระบุ', inline: true },
       { name: '📝 ชื่อ IC / ชื่อตามบัตรประชาชน', value: data.icName || 'ไม่ระบุ', inline: true },
@@ -147,7 +147,7 @@ function registrationEmbed(data: RegistrationData, editCount = 0) {
       { name: '💬 Discord', value: mention, inline: true },
       { name: '🎮 Steam', value: data.steamUrl || 'ไม่ระบุ', inline: true },
     ],
-    footer: { text: footerFor(editCount, 'MHNK Police Department') },
+    footer: { text: footerFor(editCount, 'VES-PD Police Department') },
     timestamp: new Date().toISOString(),
   };
 
@@ -163,7 +163,7 @@ function medicalEmbed(data: MedicalData, editCount = 0) {
 
   const embed: Embed = {
     title: '❤️‍🩹 ใบสมัครแพทย์ใหม่',
-    description: 'ผู้สมัครเข้าร่วมหน่วยแพทย์ MHNK',
+    description: 'ผู้สมัครเข้าร่วมหน่วยแพทย์ VES-PD',
     color: 0xef4444,
     fields: [
       { name: '📛 ชื่อ - นามสกุล (IC/ตามบัตร)', value: data.icName || 'ไม่ระบุ', inline: false },
@@ -173,7 +173,7 @@ function medicalEmbed(data: MedicalData, editCount = 0) {
       { name: '💊 ประสบการณ์ด้านสายแพทย์', value: truncate(data.medicalExperience), inline: false },
       { name: '💡 เหตุผลที่ต้องการเข้าร่วม', value: truncate(data.joinReason), inline: false },
     ],
-    footer: { text: footerFor(editCount, 'MHNK Medical Department') },
+    footer: { text: footerFor(editCount, 'VES-PD Medical Department') },
     timestamp: new Date().toISOString(),
   };
 
@@ -329,7 +329,7 @@ export async function sendProctorRecord(
 
   const embed: Embed = {
     title: '📋 บันทึกการคุมสอบ Proctor',
-    color: 0x1dc9b7,
+    color: 0xdc6d0b,
     fields: [
       { name: '👮 ผู้คุมสอบ', value: `<@${proctor.id}>`, inline: false },
       { name: '👤 ผู้สอบ', value: applicant.icName || 'ไม่ระบุ', inline: true },
@@ -340,7 +340,7 @@ export async function sendProctorRecord(
         inline: false,
       },
     ],
-    footer: { text: `MHNK Police Department - Proctor System • ${thaiDate}` },
+    footer: { text: `VES-PD Police Department - Proctor System • ${thaiDate}` },
     timestamp: new Date().toISOString(),
   };
 

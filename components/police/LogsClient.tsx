@@ -258,7 +258,7 @@ export function LogsClient() {
         </main>
       ) : !gate.allowed ? (
         <main className="flex flex-1 items-center justify-center px-4 py-10">
-          <div className="w-full max-w-sm rounded-[16px] border border-accent/20 bg-[rgba(17,24,39,0.85)] p-7 text-center">
+          <div className="w-full max-w-sm rounded-[16px] border border-accent/20 bg-[rgba(20,20,20,0.85)] p-7 text-center">
             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-[#f77f07]/30 bg-[#f77f07]/10 text-2xl">
               🔐
             </div>
@@ -303,7 +303,7 @@ export function LogsClient() {
                 className={`cursor-pointer rounded-[8px] border px-3.5 py-2 text-left transition ${
                   tab === t.id
                     ? 'border-accent/50 bg-accent/12 text-accent'
-                    : 'border-accent/12 bg-[rgba(17,24,39,0.8)] text-ink-dim hover:border-accent/30 hover:text-ink'
+                    : 'border-accent/12 bg-[rgba(20,20,20,0.8)] text-ink-dim hover:border-accent/30 hover:text-ink'
                 }`}
               >
                 <span className="block text-[0.82rem] font-bold">{t.label}</span>
@@ -313,7 +313,7 @@ export function LogsClient() {
           </div>
 
           {/* ---- filters ---- */}
-          <div className="mb-4 flex flex-wrap items-center gap-2.5 rounded-[10px] border border-accent/12 bg-[rgba(17,24,39,0.6)] p-3">
+          <div className="mb-4 flex flex-wrap items-center gap-2.5 rounded-[10px] border border-accent/12 bg-[rgba(20,20,20,0.6)] p-3">
             <div className="flex flex-wrap gap-1.5">
               {LEVELS.filter((l) => l !== 'DEBUG' || tab === 'live').map((level) => (
                 <button
@@ -384,7 +384,7 @@ export function LogsClient() {
 
           {/* ---- rows ---- */}
           {rows.length === 0 && !error && !loading ? (
-            <p className="rounded-[10px] border border-accent/12 bg-[rgba(17,24,39,0.6)] px-4 py-8 text-center text-[0.8rem] text-ink-dim">
+            <p className="rounded-[10px] border border-accent/12 bg-[rgba(20,20,20,0.6)] px-4 py-8 text-center text-[0.8rem] text-ink-dim">
               {total > 0 ? 'ไม่มีบรรทัดที่ตรงกับตัวกรอง' : 'ยังไม่มี log ในช่วงนี้'}
             </p>
           ) : (
@@ -395,7 +395,7 @@ export function LogsClient() {
                 <div
                   key={`${row.at}-${i}`}
                   className={`flex flex-wrap items-start gap-x-3 gap-y-1 px-3 py-2 text-[0.75rem] ${
-                    i % 2 === 0 ? 'bg-[rgba(17,24,39,0.7)]' : 'bg-[rgba(17,24,39,0.45)]'
+                    i % 2 === 0 ? 'bg-[rgba(20,20,20,0.7)]' : 'bg-[rgba(20,20,20,0.45)]'
                   }`}
                 >
                   <code className="shrink-0 text-[0.68rem] whitespace-nowrap text-ink-dim">

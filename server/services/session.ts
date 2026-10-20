@@ -20,7 +20,7 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { config } from '@/server/config';
 
-export const SESSION_COOKIE = 'mhnk_discord';
+export const SESSION_COOKIE = 'vespd_discord';
 
 /** Long enough that editing an application days later still works, short
     enough that a leaked cookie does not last forever. */

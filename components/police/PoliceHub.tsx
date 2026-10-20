@@ -25,13 +25,13 @@ const GROUPS: { label: string; entries: Entry[] }[] = [
         href: '/register',
         icon: '📝',
         title: 'สมัครเป็นตำรวจ',
-        description: 'แบบฟอร์มสมัครเข้าเป็นเจ้าหน้าที่ตำรวจ MHNK',
+        description: 'แบบฟอร์มสมัครเข้าเป็นเจ้าหน้าที่ตำรวจ VES-PD',
       },
       {
         href: '/medical',
         icon: '🚑',
         title: 'สมัครเป็นแพทย์',
-        description: 'แบบฟอร์มสมัครเข้าหน่วยแพทย์ MHNK',
+        description: 'แบบฟอร์มสมัครเข้าหน่วยแพทย์ VES-PD',
       },
     ],
   },
@@ -120,7 +120,7 @@ function AccessGate({
 
   return (
     <main className="flex flex-1 items-center justify-center px-4 py-10">
-      <div className="w-full max-w-sm rounded-[16px] border border-accent/20 bg-[rgba(17,24,39,0.85)] p-7 text-center shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+      <div className="w-full max-w-sm rounded-[16px] border border-accent/20 bg-[rgba(20,20,20,0.85)] p-7 text-center shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-[#f77f07]/30 bg-[#f77f07]/10 text-2xl">
           🔐
         </div>
@@ -214,7 +214,7 @@ function Hub({ onLogout }: { onLogout: () => void }) {
       <div className="mb-7 text-center">
         <h1 className="text-[1.35rem] font-bold text-ink">⚖ ศูนย์รวมระบบตำรวจ</h1>
         <p className="mt-1 text-[0.7rem] tracking-[2px] text-ink-dim uppercase">
-          MHNK Police Department — Control Center
+          VES-PD Police Department — Control Center
         </p>
       </div>
 
@@ -230,7 +230,7 @@ function Hub({ onLogout }: { onLogout: () => void }) {
                 <Link
                   key={entry.href}
                   href={entry.href}
-                  className="group flex items-center gap-4 rounded-[12px] border border-accent/12 bg-[rgba(17,24,39,0.8)] p-4 transition hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent/8 hover:shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+                  className="group flex items-center gap-4 rounded-[12px] border border-accent/12 bg-[rgba(20,20,20,0.8)] p-4 transition hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent/8 hover:shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
                 >
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] border border-accent/15 bg-accent/10 text-2xl">
                     {entry.icon}

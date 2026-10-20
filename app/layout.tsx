@@ -17,14 +17,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'MHNK Police Department - Mahahorn Diwa',
-  description: 'ระบบจัดการข้อมูลเจ้าหน้าที่ตำรวจ MHNK — Mahahorn Diwa FiveM Server',
+  title: 'VES-PD — Vesper Police Department',
+  description: 'ระบบจัดการข้อมูลเจ้าหน้าที่ตำรวจ VES-PD — Vesper PD FiveM Server',
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0a0f1e',
+  themeColor: '#0a0a0a',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

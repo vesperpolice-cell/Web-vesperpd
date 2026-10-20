@@ -172,7 +172,7 @@ export function ProctorPanel() {
       <div className="container">
         <BackHome className="mb-2" />
         <h1>⚙️ Proctor</h1>
-        <p className="subtitle">MHNK Police Department — ระบบตรวจสอบและอนุมัติใบสมัคร</p>
+        <p className="subtitle">VES-PD Police Department — ระบบตรวจสอบและอนุมัติใบสมัคร</p>
 
         <PageToast toast={toast} />
 

@@ -3,7 +3,7 @@ import { ProctorPanel } from '@/components/forms/ProctorPanel';
 import './proctor.css';
 
 export const metadata: Metadata = {
-  title: 'Proctor - MHNK Police Department',
+  title: 'Proctor - VES-PD Police Department',
 };
 
 export default function ProctorPage() {

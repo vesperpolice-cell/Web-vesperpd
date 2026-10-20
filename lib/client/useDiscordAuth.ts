@@ -17,7 +17,7 @@ export interface DiscordAuthState {
   avatarUrl: string | null;
 }
 
-const PROFILE_KEY = 'mhnk_discord_profile';
+const PROFILE_KEY = 'vespd_discord_profile';
 
 /* Display only. The OAuth redirect is the one moment the name and avatar hash
    are known, and it strips its own params immediately afterwards — so without

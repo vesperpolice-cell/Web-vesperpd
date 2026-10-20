@@ -9,7 +9,7 @@ const BADGE_CLASS =
 export function SiteHeader({
   children,
   extraBadge,
-  title = 'Mahahorn Diwa Police Department',
+  title = 'Vesper Police Department',
   unit = 'กรมตำรวจ',
   badge = '⚖ POLICE',
   badgeHref,
@@ -26,11 +26,11 @@ export function SiteHeader({
   badgeTitle?: string;
 }) {
   return (
-    <header className="relative z-10 border-b border-accent/12 bg-gradient-to-b from-[rgba(15,23,42,0.98)] to-[rgba(10,15,30,0.95)] px-4 pt-3 pb-4 md:px-6 md:pt-4 md:pb-5">
+    <header className="relative z-10 border-b border-accent/12 bg-gradient-to-b from-[rgba(20,20,20,0.98)] to-[rgba(10,10,10,0.95)] px-4 pt-3 pb-4 md:px-6 md:pt-4 md:pb-5">
       <div className="mb-4 flex flex-wrap items-center justify-center gap-3 md:mb-5 md:gap-4">
         <img
           src="/logo.webp"
-          alt="MHNK PD Logo"
+          alt="VES-PD Logo"
           width={72}
           height={72}
           className="h-14 w-14 shrink-0 object-cover transition-transform duration-300 hover:scale-105 md:h-[72px] md:w-[72px]"
@@ -41,7 +41,7 @@ export function SiteHeader({
             {title}
           </h1>
           <div className="mt-0.5 text-center text-[0.55rem] tracking-[2px] text-ink-dim uppercase md:text-[0.6rem] md:tracking-[3px]">
-            {unit} <span className="text-accent">MHNK</span> — Mahahorn Diwa
+            {unit} <span className="text-accent">VES-PD</span>
           </div>
         </div>
 
@@ -52,7 +52,7 @@ export function SiteHeader({
             <Link
               href={badgeHref}
               title={badgeTitle}
-              className={`${BADGE_CLASS} cursor-pointer transition hover:-translate-y-px hover:border-accent/60 hover:bg-accent/20 hover:shadow-[0_0_14px_rgba(29,201,183,0.25)]`}
+              className={`${BADGE_CLASS} cursor-pointer transition hover:-translate-y-px hover:border-accent/60 hover:bg-accent/20 hover:shadow-[0_0_14px_rgba(220,109,11,0.25)]`}
             >
               {badge}
             </Link>
@@ -75,9 +75,9 @@ function HeaderBadge({ children }: { children: React.ReactNode }) {
 
 /* Sizes, opacity and the white-ish rule come from v2's footer.css, where the
    footer is deliberately faint enough to sit under the content. */
-export function SiteFooter({ department = 'MHNK POLICE DEPARTMENT' }: { department?: string }) {
+export function SiteFooter({ department = 'VES-PD POLICE DEPARTMENT' }: { department?: string }) {
   return (
-    <footer className="relative z-10 border-t border-white/5 bg-[rgba(10,15,30,0.5)] p-4 text-center md:p-5">
+    <footer className="relative z-10 border-t border-white/5 bg-[rgba(10,10,10,0.5)] p-4 text-center md:p-5">
       <p className="text-[0.6rem] tracking-[0.3px] text-ink-dim opacity-45 md:text-[0.65rem]">
         © 2026 <span className="text-accent opacity-100">{department}</span> — FiveM Server
       </p>

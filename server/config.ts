@@ -68,7 +68,7 @@ export const config = {
      down the file people actually work in and eats its 10M-cell ceiling.
      Defaulted rather than required so a missing variable cannot take the whole
      site down over a page only admins open. */
-  LOG_SHEET_ID: process.env.LOG_SHEET_ID || '1YV_BIFiilxUM9XrW1cSYZTOgne1JnKoCXtRw7PUCCGs',
+  LOG_SHEET_ID: process.env.LOG_SHEET_ID || '1TEAXp_nIblYgKMIl9-TmlwiLhjL19KCZAuf8N64spwI',
 
   /* One tab per writer: this app appends to the first, the bot to the second.
      Separate tabs mean the two never contend for the same append range, and

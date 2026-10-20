@@ -1,7 +1,7 @@
 {
-  "name": "mhnk-police-department",
+  "name": "vesperpd-web",
   "version": "3.0.0",
-  "description": "MHNK Police Department - FiveM Police Management Website",
+  "description": "VES-PD Police Department - FiveM Police Management Website",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -14,7 +14,7 @@
   "keywords": [
     "fivem",
     "police",
-    "mhnk"
+    "vesperpd"
   ],
   "license": "MIT",
   "dependencies": {

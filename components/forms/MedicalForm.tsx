@@ -28,7 +28,7 @@ const c = applicationPageClasses;
 
 /** v2's .time-input-wrapper input[type="time"] — wider type, own picker tint. */
 const TIME_INPUT =
-  'w-full cursor-pointer rounded-md border border-accent/12 bg-white/5 px-4 py-3.5 font-eng text-base text-ink outline-none transition hover:border-accent/30 focus:border-accent focus:bg-accent/10 focus:shadow-[0_0_0_3px_rgba(29,201,183,0.1)] [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:[filter:invert(0.7)]';
+  'w-full cursor-pointer rounded-md border border-accent/12 bg-white/5 px-4 py-3.5 font-eng text-base text-ink outline-none transition hover:border-accent/30 focus:border-accent focus:bg-accent/10 focus:shadow-[0_0_0_3px_rgba(220,109,11,0.1)] [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:[filter:invert(0.7)]';
 
 interface FormState {
   icFirstName: string;
@@ -93,7 +93,7 @@ function toLines(message: string): string[] {
 /** v2's #loadingOverlay. */
 function LoadingOverlay({ text }: { text: string }) {
   return (
-    <div className="fixed inset-0 z-[1000] flex flex-col items-center justify-center gap-5 bg-[rgba(10,15,30,0.9)] backdrop-blur-[5px]">
+    <div className="fixed inset-0 z-[1000] flex flex-col items-center justify-center gap-5 bg-[rgba(10,10,10,0.9)] backdrop-blur-[5px]">
       <div className="h-[50px] w-[50px] animate-[spin_1s_linear_infinite] rounded-full border-[3px] border-accent/12 border-t-accent" />
       <p className="text-base text-ink-dim">{text}</p>
     </div>
@@ -369,7 +369,7 @@ export function MedicalForm() {
   return (
     <div className={c.page}>
       <SiteHeader
-        title="Mahahorn Diwa Medical Department"
+        title="Vesper Medical Department"
         unit="หน่วยแพทย์"
         badge="💚 MEDICAL"
       />
@@ -415,7 +415,7 @@ export function MedicalForm() {
               <div className={c.header}>
                 <div className={c.headerIcon}>💚</div>
                 <h2 className={c.headerTitle}>สมัครเป็นแพทย์</h2>
-                <p className={c.headerDesc}>กรอกข้อมูลด้านล่างเพื่อสมัครเข้าร่วมหน่วยแพทย์ MHNK</p>
+                <p className={c.headerDesc}>กรอกข้อมูลด้านล่างเพื่อสมัครเข้าร่วมหน่วยแพทย์ VES-PD</p>
               </div>
 
               <DiscordConnectPanel auth={auth} />
@@ -543,7 +543,7 @@ export function MedicalForm() {
                 <Field
                   icon="💡"
                   label="เหตุผลที่ต้องการเข้าร่วมหน่วยแพทย์"
-                  hint="เขียนเหตุผลที่ต้องการเข้าร่วมหน่วยแพทย์ MHNK"
+                  hint="เขียนเหตุผลที่ต้องการเข้าร่วมหน่วยแพทย์ VES-PD"
                 >
                   <FormTextArea
                     value={form.joinReason}
@@ -574,7 +574,7 @@ export function MedicalForm() {
         </div>
       </main>
 
-      <SiteFooter department="MHNK MEDICAL DEPARTMENT" />
+      <SiteFooter department="VES-PD MEDICAL DEPARTMENT" />
 
       {loadingText && <LoadingOverlay text={loadingText} />}
     </div>

@@ -18,10 +18,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { mutations } from './queries';
 
-const STORAGE_KEY = 'mhnk_admin_mode';
+const STORAGE_KEY = 'vespd_admin_mode';
 
-/** Written by the PIN build. `mhnk_payment_pin` held the PIN itself. */
-const LEGACY_KEYS = ['mhnk_admin_session', 'mhnk_payment_pin'];
+/** Written by the PIN build. `vespd_payment_pin` held the PIN itself. */
+const LEGACY_KEYS = ['vespd_admin_session', 'vespd_payment_pin'];
 
 const TTL_MS = 30 * 60 * 1000;
 

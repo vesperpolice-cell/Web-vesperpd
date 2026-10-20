@@ -344,7 +344,7 @@ export function ProfileClient() {
   }
 
   const header = (
-    <header className="relative z-10 border-b border-accent/12 bg-gradient-to-b from-[rgba(15,23,42,0.98)] to-[rgba(10,15,30,0.95)] px-4 py-4 md:px-6">
+    <header className="relative z-10 border-b border-accent/12 bg-gradient-to-b from-[rgba(20,20,20,0.98)] to-[rgba(10,10,10,0.95)] px-4 py-4 md:px-6">
       {/* v2's header-top is a single centered, wrapping row — back link, logo,
           title block and badges all sit together, not split left/right. */}
       <div className="mx-auto flex max-w-[800px] flex-wrap items-center justify-center gap-4">
@@ -361,7 +361,7 @@ export function ProfileClient() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/logo.webp"
-          alt="MHNK PD Logo"
+          alt="VES-PD Logo"
           width={72}
           height={72}
           className="h-[72px] w-[72px] shrink-0 object-cover transition-transform duration-300 hover:scale-105"
@@ -370,7 +370,7 @@ export function ProfileClient() {
         <div>
           <h1 className="text-center text-[1.15rem] font-bold text-ink">ประวัติเจ้าหน้าที่</h1>
           <div className="mt-0.5 text-center text-[0.6rem] tracking-[3px] text-ink-dim uppercase">
-            กรมตำรวจ <span className="text-accent">MHNK</span> — Mahahorn Diwa
+            กรมตำรวจ <span className="text-accent">VES-PD</span>
           </div>
         </div>
 
