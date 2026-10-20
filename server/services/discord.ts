@@ -4,6 +4,7 @@
 
 import { config } from '@/server/config';
 import { ApiError } from '@/server/errors';
+import { findPendingPhone } from './pending';
 
 interface EmbedField {
   name: string;
@@ -143,7 +144,9 @@ function registrationEmbed(data: RegistrationData, editCount = 0) {
       { name: '👤 ชื่อ เล่น IC', value: data.ocName || 'ไม่ระบุ', inline: true },
       { name: '📝 ชื่อ IC / ชื่อตามบัตรประชาชน', value: data.icName || 'ไม่ระบุ', inline: true },
       { name: '🎂 อายุ OC', value: data.ocAge ? `${data.ocAge} ปี` : 'ไม่ระบุ', inline: true },
-      { name: '📱 เบอร์ IC', value: data.icPhone || 'ไม่ระบุ', inline: true },
+      /* The phone is deliberately absent: it still goes to the sheet, but this
+         embed sits in a channel anyone can scroll back through. fetchRegistration
+         reads it back from the sheet so editing keeps working. */
       { name: '💬 Discord', value: mention, inline: true },
       { name: '🎮 Steam', value: data.steamUrl || 'ไม่ระบุ', inline: true },
     ],
@@ -244,7 +247,10 @@ export async function fetchRegistration(messageId: string, verifiedUserId: strin
       ocName: read('ชื่อ เล่น IC'),
       icName: read('ชื่อ IC'),
       ocAge: parseInt(read('อายุ OC'), 10) || 0,
-      icPhone: read('เบอร์ IC'),
+      /* From the sheet, not the embed — see findPendingPhone. Older embeds
+         still carry the field, but reading it there would mean the number
+         goes on being republished every time the application is edited. */
+      icPhone: await findPendingPhone(verifiedUserId),
       discordId: read('Discord'),
       steamUrl: read('Steam'),
     },

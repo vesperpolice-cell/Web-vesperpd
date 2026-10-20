@@ -2,17 +2,17 @@
 
 /* ========== Reset & Base ========== */
 .proctor-page * { margin: 0; padding: 0; box-sizing: border-box; }
-.proctor-page { font-family: 'Segoe UI', Tahoma, sans-serif; background: #0f0f1a; color: #e0e0e0; min-height: 100vh; }
+.proctor-page { font-family: 'Segoe UI', Tahoma, sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
 .proctor-page .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-.proctor-page h1 { text-align: center; color: #f0c040; margin-bottom: 10px; font-size: 28px; }
+.proctor-page h1 { text-align: center; color: #dc6d0b; margin-bottom: 10px; font-size: 28px; }
 .proctor-page .subtitle { text-align: center; color: #888; margin-bottom: 30px; }
 
 /* ========== Form Elements ========== */
 .proctor-page input[type="text"] {
-    width: 100%; padding: 12px 16px; background: #252545; border: 1px solid #3a3a5a;
+    width: 100%; padding: 12px 16px; background: #1e1e1e; border: 1px solid #3a3a3a;
     border-radius: 8px; color: #fff; font-size: 16px; outline: none; margin-bottom: 15px;
 }
-.proctor-page input:focus { border-color: #f0c040; }
+.proctor-page input:focus { border-color: #dc6d0b; }
 .proctor-page input:disabled { opacity: 0.35; cursor: not-allowed; }
 
 .proctor-page button {
@@ -25,7 +25,7 @@
 /* ========== Buttons ========== */
 .proctor-page .btn-success { background: #22c55e; color: #fff; }
 .proctor-page .btn-danger { background: #ef4444; color: #fff; }
-.proctor-page .btn-secondary { background: #3a3a5a; color: #e0e0e0; }
+.proctor-page .btn-secondary { background: #3a3a3a; color: #e0e0e0; }
 .proctor-page .btn-sm { padding: 6px 16px; font-size: 13px; }
 
 .proctor-page .btn-discord {
@@ -39,13 +39,13 @@
 
 /* ========== Login Box ========== */
 .proctor-page .login-box, .proctor-page .panel {
-    background: #1a1a2e; border-radius: 12px; padding: 24px;
-    margin-bottom: 20px; border: 1px solid #2a2a4a;
+    background: #141414; border-radius: 12px; padding: 24px;
+    margin-bottom: 20px; border: 1px solid #2a2a2a;
 }
 .proctor-page .login-box { max-width: 420px; margin: 40px auto; text-align: center; }
 
 .proctor-page .dc-section {
-    margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #2a2a4a;
+    margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #2a2a2a;
 }
 .proctor-page .dc-section .dc-user {
     display: flex; align-items: center; gap: 12px; justify-content: center;
@@ -61,14 +61,14 @@
     background: none; border: none; color: #888; cursor: pointer;
     padding: 4px; border-radius: 4px; display: inline-flex; align-items: center; margin-left: 8px;
 }
-.proctor-page .dc-section .dc-disconnect:hover { color: #ef4444; background: #2a2a4a; }
+.proctor-page .dc-section .dc-disconnect:hover { color: #ef4444; background: #2a2a2a; }
 .proctor-page .dc-section-label { color: #888; font-size: 13px; margin-bottom: 12px; display: block; }
 
 /* Signed-in bar above the console: which account is in, and the way out.
    Sits top right, sized to its contents rather than to the container. */
 .proctor-page .dc-bar {
     display: flex; align-items: center; gap: 10px;
-    background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 10px;
+    background: #141414; border: 1px solid #2a2a2a; border-radius: 10px;
     padding: 8px 12px; margin: 0 0 20px auto; width: fit-content;
     max-width: 100%; flex-wrap: wrap; justify-content: flex-end;
 }
@@ -91,10 +91,10 @@
 /* ========== Stats ========== */
 .proctor-page .stats { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
 .proctor-page .stat-card {
-    background: #1a1a2e; border-radius: 10px; padding: 16px 24px;
-    flex: 1; min-width: 150px; text-align: center; border: 1px solid #2a2a4a;
+    background: #141414; border-radius: 10px; padding: 16px 24px;
+    flex: 1; min-width: 150px; text-align: center; border: 1px solid #2a2a2a;
 }
-.proctor-page .stat-card .num { font-size: 32px; font-weight: 700; color: #f0c040; }
+.proctor-page .stat-card .num { font-size: 32px; font-weight: 700; color: #dc6d0b; }
 .proctor-page .stat-card .label { font-size: 13px; color: #888; margin-top: 4px; }
 
 /* ========== Filter Bar ========== */
@@ -105,14 +105,14 @@
 .proctor-page .table-wrap { max-height: 600px; overflow-y: auto; }
 .proctor-page .table-wrap table { width: 100%; border-collapse: collapse; table-layout: fixed; }
 .proctor-page .table-wrap th, .proctor-page .table-wrap td {
-    padding: 12px 6px; text-align: left; border-bottom: 1px solid #2a2a4a;
+    padding: 12px 6px; text-align: left; border-bottom: 1px solid #2a2a2a;
     font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .proctor-page .table-wrap th {
-    background: #252545; color: #aaa; font-size: 12px;
+    background: #1e1e1e; color: #aaa; font-size: 12px;
     text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 0;
 }
-.proctor-page .table-wrap tr:hover td { background: #252545; }
+.proctor-page .table-wrap tr:hover td { background: #1e1e1e; }
 
 .proctor-page .col-idx { width: 32px; }
 .proctor-page .col-time { width: 110px; }
@@ -135,7 +135,7 @@
 .proctor-page .actions { display: flex; gap: 6px; width: 100%; }
 .proctor-page .actions button { flex: 1; min-width: 0; text-align: center; white-space: nowrap; }
 .proctor-page .actions .btn-done {
-    background: #2a2a4a; color: #888; font-size: 13px; font-weight: 600;
+    background: #2a2a2a; color: #888; font-size: 13px; font-weight: 600;
     border: none; border-radius: 8px; cursor: not-allowed; padding: 6px 4px; width: 100%;
 }
 
@@ -158,13 +158,13 @@
 .proctor-page .log-section { margin-top: 30px; }
 .proctor-page .log-section summary { cursor: pointer; color: #888; font-size: 14px; padding: 8px 0; }
 .proctor-page .log-section pre {
-    background: #0f0f1a; padding: 12px; border-radius: 8px; font-size: 12px;
+    background: #0a0a0a; padding: 12px; border-radius: 8px; font-size: 12px;
     max-height: 200px; overflow-y: auto; color: #aaa; margin-top: 8px;
 }
 /* ========== Page backdrop ==========
    The v2 page had no decorative layers and its own body colour; the shared
    layout renders them for every route, so they are switched off here. */
-body:has(.proctor-page) { background: #0f0f1a; }
+body:has(.proctor-page) { background: #0a0a0a; }
 body:has(.proctor-page) .scanner-line,
 body:has(.proctor-page) .bg-glow,
 body:has(.proctor-page) .bg-dots { display: none; }

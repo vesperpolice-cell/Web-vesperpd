@@ -108,6 +108,26 @@ export async function findPendingMessageId(discordId: string): Promise<string | 
   return found?.messageId || null;
 }
 
+/**
+ * The phone on this account's latest application, or '' when there is no row.
+ *
+ * The embed deliberately no longer carries it — a channel anyone can scroll
+ * back through is the wrong place for an applicant's number. The sheet is
+ * therefore the only copy the edit form can read it back from, so dropping
+ * this lookup would silently blank the field on every edit.
+ */
+export async function findPendingPhone(discordId: string): Promise<string> {
+  const found = await findLatestSubmission(REGISTER_SHEET, discordId);
+  if (!found) return '';
+
+  const response = await getSheets().spreadsheets.values.get({
+    spreadsheetId: config.PENDING_SPREADSHEET_ID,
+    range: `${config.PENDING_SHEET_NAME}!E${found.row}`,
+  });
+
+  return String(response.data.values?.[0]?.[0] ?? '').trim();
+}
+
 /** Updates columns D–G on whichever row holds this Discord id. */
 export async function updatePendingRegistration(
   discordId: string,

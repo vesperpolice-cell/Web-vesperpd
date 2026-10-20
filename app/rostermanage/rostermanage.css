@@ -1,16 +1,16 @@
 /* Ported verbatim from the v2 page (public/rostermanage.html inline stylesheet), with selectors scoped to .rostermanage-page and keyframes namespaced so nothing leaks into other routes. */
 
 .rostermanage-page * { margin: 0; padding: 0; box-sizing: border-box; }
-.rostermanage-page { font-family: 'Segoe UI', Tahoma, sans-serif; background: #0f0f1a; color: #e0e0e0; min-height: 100vh; }
+.rostermanage-page { font-family: 'Segoe UI', Tahoma, sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
 .rostermanage-page .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-.rostermanage-page h1 { text-align: center; color: #f0c040; margin-bottom: 10px; font-size: 28px; }
+.rostermanage-page h1 { text-align: center; color: #dc6d0b; margin-bottom: 10px; font-size: 28px; }
 .rostermanage-page .subtitle { text-align: center; color: #888; margin-bottom: 30px; }
 
 .rostermanage-page input[type="text"] {
-    width: 100%; padding: 12px 16px; background: #252545; border: 1px solid #3a3a5a;
+    width: 100%; padding: 12px 16px; background: #1e1e1e; border: 1px solid #3a3a3a;
     border-radius: 8px; color: #fff; font-size: 16px; outline: none; margin-bottom: 15px;
 }
-.rostermanage-page input:focus { border-color: #f0c040; }
+.rostermanage-page input:focus { border-color: #dc6d0b; }
 .rostermanage-page input:disabled { opacity: 0.35; cursor: not-allowed; }
 
 .rostermanage-page button {
@@ -22,8 +22,8 @@
 
 .rostermanage-page .btn-success { background: #22c55e; color: #fff; }
 .rostermanage-page .btn-danger { background: #ef4444; color: #fff; }
-.rostermanage-page .btn-secondary { background: #3a3a5a; color: #e0e0e0; }
-.rostermanage-page .btn-warning { background: #f59e0b; color: #1a1a2e; }
+.rostermanage-page .btn-secondary { background: #3a3a3a; color: #e0e0e0; }
+.rostermanage-page .btn-warning { background: #f59e0b; color: #141414; }
 .rostermanage-page .btn-sm { padding: 6px 16px; font-size: 13px; }
 .rostermanage-page .btn-xs { padding: 4px 10px; font-size: 12px; }
 
@@ -37,13 +37,13 @@
 .rostermanage-page .btn-discord:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .rostermanage-page .login-box, .rostermanage-page .panel {
-    background: #1a1a2e; border-radius: 12px; padding: 24px;
-    margin-bottom: 20px; border: 1px solid #2a2a4a;
+    background: #141414; border-radius: 12px; padding: 24px;
+    margin-bottom: 20px; border: 1px solid #2a2a2a;
 }
 .rostermanage-page .login-box { max-width: 420px; margin: 40px auto; text-align: center; }
 
 .rostermanage-page .dc-section {
-    margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #2a2a4a;
+    margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #2a2a2a;
 }
 .rostermanage-page .dc-section .dc-user {
     display: flex; align-items: center; gap: 12px; justify-content: center;
@@ -59,14 +59,14 @@
     background: none; border: none; color: #888; cursor: pointer;
     padding: 4px; border-radius: 4px; display: inline-flex; align-items: center; margin-left: 8px;
 }
-.rostermanage-page .dc-section .dc-disconnect:hover { color: #ef4444; background: #2a2a4a; }
+.rostermanage-page .dc-section .dc-disconnect:hover { color: #ef4444; background: #2a2a2a; }
 .rostermanage-page .dc-section-label { color: #888; font-size: 13px; margin-bottom: 12px; display: block; }
 
 /* Signed-in bar above the console: which account is in, and the way out.
    Sits top right, sized to its contents rather than to the container. */
 .rostermanage-page .dc-bar {
     display: flex; align-items: center; gap: 10px;
-    background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 10px;
+    background: #141414; border: 1px solid #2a2a2a; border-radius: 10px;
     padding: 8px 12px; margin: 0 0 20px auto; width: fit-content;
     max-width: 100%; flex-wrap: wrap; justify-content: flex-end;
 }
@@ -88,57 +88,57 @@
 
 .rostermanage-page .stats { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
 .rostermanage-page .stat-card {
-    background: #1a1a2e; border-radius: 10px; padding: 16px 24px;
-    flex: 1; min-width: 150px; text-align: center; border: 1px solid #2a2a4a;
+    background: #141414; border-radius: 10px; padding: 16px 24px;
+    flex: 1; min-width: 150px; text-align: center; border: 1px solid #2a2a2a;
 }
-.rostermanage-page .stat-card .num { font-size: 32px; font-weight: 700; color: #f0c040; }
+.rostermanage-page .stat-card .num { font-size: 32px; font-weight: 700; color: #dc6d0b; }
 .rostermanage-page .stat-card .label { font-size: 13px; color: #888; margin-top: 4px; }
 
 .rostermanage-page .tab-bar { display: flex; gap: 10px; margin-bottom: 20px; }
 .rostermanage-page .tab-btn {
     padding: 10px 24px; border: none; border-radius: 8px 8px 0 0;
     font-size: 15px; font-weight: 600; cursor: pointer;
-    background: #252545; color: #888; transition: all 0.2s;
+    background: #1e1e1e; color: #888; transition: all 0.2s;
 }
-.rostermanage-page .tab-btn.active { background: #1a1a2e; color: #f0c040; border-bottom: 2px solid #f0c040; }
-.rostermanage-page .tab-btn:hover:not(.active) { background: #2a2a4a; }
+.rostermanage-page .tab-btn.active { background: #141414; color: #dc6d0b; border-bottom: 2px solid #dc6d0b; }
+.rostermanage-page .tab-btn:hover:not(.active) { background: #2a2a2a; }
 
 .rostermanage-page .filter-bar { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; align-items: center; }
 .rostermanage-page .filter-bar input { width: auto; flex: 1; min-width: 200px; margin-bottom: 0; }
 .rostermanage-page .filter-bar select {
-    padding: 10px; background: #252545; border: 1px solid #3a3a5a;
+    padding: 10px; background: #1e1e1e; border: 1px solid #3a3a3a;
     border-radius: 8px; color: #fff; font-size: 14px; cursor: pointer;
 }
 
 /* Tick several people, then pick what happens to all of them. */
 .rostermanage-page .bulk-bar {
     display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
-    background: #252545; border: 1px solid #f0c04055; border-radius: 8px;
+    background: #1e1e1e; border: 1px solid #dc6d0b55; border-radius: 8px;
     padding: 10px 12px; margin-bottom: 15px;
 }
-.rostermanage-page .bulk-bar .bulk-count { color: #f0c040; font-weight: 600; font-size: 13px; }
+.rostermanage-page .bulk-bar .bulk-count { color: #dc6d0b; font-weight: 600; font-size: 13px; }
 .rostermanage-page .bulk-bar select {
-    padding: 8px 10px; background: #1a1a2e; border: 1px solid #3a3a5a;
+    padding: 8px 10px; background: #141414; border: 1px solid #3a3a3a;
     border-radius: 6px; color: #fff; font-size: 13px; cursor: pointer;
 }
 
 .rostermanage-page .pick-col { width: 34px; text-align: center; }
 .rostermanage-page .pick-col input[type="checkbox"] {
-    width: 16px; height: 16px; cursor: pointer; accent-color: #f0c040; vertical-align: middle;
+    width: 16px; height: 16px; cursor: pointer; accent-color: #dc6d0b; vertical-align: middle;
 }
 .rostermanage-page .pick-col input[type="checkbox"]:disabled { cursor: not-allowed; opacity: 0.4; }
 
-.rostermanage-page .table-wrap { max-height: 500px; overflow-y: auto; border: 1px solid #2a2a4a; border-radius: 8px; }
+.rostermanage-page .table-wrap { max-height: 500px; overflow-y: auto; border: 1px solid #2a2a2a; border-radius: 8px; }
 .rostermanage-page .table-wrap table { width: 100%; border-collapse: collapse; table-layout: auto; }
 .rostermanage-page .table-wrap th, .rostermanage-page .table-wrap td {
-    padding: 8px 6px; text-align: left; border-bottom: 1px solid #2a2a4a;
+    padding: 8px 6px; text-align: left; border-bottom: 1px solid #2a2a2a;
     font-size: 13px; white-space: nowrap;
 }
 .rostermanage-page .table-wrap th {
-    background: #252545; color: #aaa; font-size: 11px;
+    background: #1e1e1e; color: #aaa; font-size: 11px;
     text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 0; z-index: 1;
 }
-.rostermanage-page .table-wrap tr:hover td { background: #252545; }
+.rostermanage-page .table-wrap tr:hover td { background: #1e1e1e; }
 
 .rostermanage-page .empty-msg { text-align: center; padding: 40px; color: #666; font-size: 16px; }
 
@@ -149,7 +149,7 @@
 .rostermanage-page .status-resign { background: #3b82f633; color: #3b82f6; }
 
 .rostermanage-page .status-select {
-    padding: 4px 8px; background: #252545; border: 1px solid #3a3a5a;
+    padding: 4px 8px; background: #1e1e1e; border: 1px solid #3a3a3a;
     border-radius: 6px; color: #fff; font-size: 12px; cursor: pointer;
 }
 .rostermanage-page .actions { display: flex; gap: 4px; align-items: center; flex-wrap: nowrap; }
@@ -173,7 +173,7 @@
 .rostermanage-page .log-section { margin-top: 30px; }
 .rostermanage-page .log-section summary { cursor: pointer; color: #888; font-size: 14px; padding: 8px 0; }
 .rostermanage-page .log-section pre {
-    background: #0f0f1a; padding: 12px; border-radius: 8px; font-size: 12px;
+    background: #0a0a0a; padding: 12px; border-radius: 8px; font-size: 12px;
     max-height: 200px; overflow-y: auto; color: #aaa; margin-top: 8px;
 }
 .rostermanage-page .confirm-dialog {
@@ -182,16 +182,16 @@
     z-index: 1000; display: none;
 }
 .rostermanage-page .confirm-box {
-    background: #1a1a2e; border-radius: 12px; padding: 24px; max-width: 420px;
-    border: 1px solid #2a2a4a; text-align: center;
+    background: #141414; border-radius: 12px; padding: 24px; max-width: 420px;
+    border: 1px solid #2a2a2a; text-align: center;
 }
-.rostermanage-page .confirm-box h3 { color: #f0c040; margin-bottom: 12px; }
+.rostermanage-page .confirm-box h3 { color: #dc6d0b; margin-bottom: 12px; }
 .rostermanage-page .confirm-box p { color: #ccc; margin-bottom: 20px; font-size: 14px; }
 .rostermanage-page .confirm-box .actions { display: flex; gap: 12px; justify-content: center; }
 /* ========== Page backdrop ==========
    The v2 page had no decorative layers and its own body colour; the shared
    layout renders them for every route, so they are switched off here. */
-body:has(.rostermanage-page) { background: #0f0f1a; }
+body:has(.rostermanage-page) { background: #0a0a0a; }
 body:has(.rostermanage-page) .scanner-line,
 body:has(.rostermanage-page) .bg-glow,
 body:has(.rostermanage-page) .bg-dots { display: none; }
