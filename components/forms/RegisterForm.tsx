@@ -61,6 +61,17 @@ export function RegisterForm() {
   const set = (key: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((prev) => ({ ...prev, [key]: e.target.value }));
 
+  /* The two name halves take no spaces at all — which is what their hints
+     already tell the applicant, and what applyLoaded below depends on: it
+     rebuilds the pair by splitting icName at its first space, so a space
+     typed here comes back inside the other field. Stripping on input makes
+     that promise true instead of advisory, and catches a trailing space
+     pasted in from somewhere else, which is invisible and survives the
+     join's own trim. */
+  const setNamePart =
+    (key: 'icFirstName' | 'icLastName') => (e: React.ChangeEvent<HTMLInputElement>) =>
+      setForm((prev) => ({ ...prev, [key]: e.target.value.replace(/\s/g, '') }));
+
   /** Drops a submission read back out of Discord into the form. */
   const applyLoaded = useCallback(
     (result: {
@@ -340,7 +351,7 @@ export function RegisterForm() {
                   <div className="flex min-w-0 flex-1 flex-col gap-2">
                     <FormInput
                       value={form.icFirstName}
-                      onChange={set('icFirstName')}
+                      onChange={setNamePart('icFirstName')}
                       placeholder="First Name"
                       maxLength={50}
                       required
@@ -350,7 +361,7 @@ export function RegisterForm() {
                   <div className="flex min-w-0 flex-1 flex-col gap-2">
                     <FormInput
                       value={form.icLastName}
-                      onChange={set('icLastName')}
+                      onChange={setNamePart('icLastName')}
                       placeholder="Last Name"
                       maxLength={50}
                       required
