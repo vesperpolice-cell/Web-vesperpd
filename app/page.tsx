@@ -6,10 +6,8 @@ import { NavTabs, type PageId } from '@/components/NavTabs';
 import { SearchBar } from '@/components/SearchBar';
 import { AllTimeTop10, WeeklyTop10 } from '@/components/Top10Sidebar';
 import { RosterView } from '@/components/views/RosterView';
-import { RulesView } from '@/components/views/RulesView';
 import { RulesLinkView } from '@/components/views/RulesLinkView';
-import { FinesView } from '@/components/views/FinesView';
-import { CasesView } from '@/components/views/CasesView';
+import { ComingSoonView } from '@/components/views/ComingSoonView';
 import { ScheduleView } from '@/components/views/ScheduleView';
 import { ErrorState, Loading } from '@/components/ui/States';
 import { AdminGateModal } from '@/components/ui/Modal';
@@ -44,9 +42,6 @@ export default function HomePage() {
   // The roster feeds both the officer list and the schedule table.
   const officers = useApi(queries.officers, 'officers');
   const weeks = useApi(queries.weeks, 'weeks');
-  const cases = useApi(queries.cases, 'cases_data', seen('cases'));
-  const conduct = useApi(queries.conduct, 'conduct_data', seen('conduct'));
-  const fines = useApi(queries.fines, 'fines_data', seen('fines'));
   const schedule = useApi(queries.scheduleConfig, 'schedule_config', seen('schedule'));
 
   const allOfficers = useMemo(() => officers.data ?? [], [officers.data]);
@@ -127,46 +122,13 @@ export default function HomePage() {
               <RosterView officers={filteredOfficers} total={allOfficers.length} />
             ))}
 
-          {page === 'cases' && (
-            <CasesView
-              items={cases.data}
-              loading={cases.loading}
-              error={cases.error}
-              query={query}
-              onRetry={cases.reload}
-            />
-          )}
+          {page === 'cases' && <ComingSoonView icon="⚖" title="การทำคดี" />}
 
-          {page === 'conduct' && (
-            <RulesView
-              items={conduct.data}
-              loading={conduct.loading}
-              error={conduct.error}
-              query={query}
-              onRetry={conduct.reload}
-              groupField="title"
-              icon="📚"
-              title="ข้อปฏิบัติเจ้าหน้าที่"
-              emptyTitle="ไม่พบข้อปฏิบัติที่ค้นหา"
-              type="conduct"
-              adminMode={gate.adminMode}
-              onDataChanged={conduct.reload}
-            />
-          )}
+          {page === 'conduct' && <ComingSoonView icon="📚" title="ข้อปฏิบัติเจ้าหน้าที่" />}
 
           {page === 'rules' && <RulesLinkView />}
 
-          {page === 'fines' && (
-            <FinesView
-              items={fines.data}
-              loading={fines.loading}
-              error={fines.error}
-              query={query}
-              onRetry={fines.reload}
-              adminMode={gate.adminMode}
-              onDataChanged={fines.reload}
-            />
-          )}
+          {page === 'fines' && <ComingSoonView icon="💰" title="ค่าปรับ" />}
 
           {page === 'schedule' &&
             (officers.loading ? (
