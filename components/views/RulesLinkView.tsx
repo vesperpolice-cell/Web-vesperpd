@@ -5,7 +5,7 @@ import { SectionHeader } from '@/components/ui/States';
    rather than a copy — one place to maintain instead of two that drift. */
 
 const RULES_URL =
-  'https://sites.google.com/view/mahanakorndiwa/%E0%B8%AB%E0%B8%99%E0%B8%A7%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%99/%E0%B8%81%E0%B8%8F%E0%B8%95%E0%B8%B3%E0%B8%A3%E0%B8%A7%E0%B8%88?authuser=0';
+  'https://sites.google.com/view/vesper-police-department/%E0%B8%81%E0%B8%8E%E0%B8%95%E0%B8%B3%E0%B8%A3%E0%B8%A7%E0%B8%88?authuser=0';
 
 export function RulesLinkView() {
   return (
