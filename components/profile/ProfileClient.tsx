@@ -210,15 +210,34 @@ export function ProfileClient() {
   }, [activeWeek, loadWeek]);
 
   /* Poll the active week so a payment made elsewhere shows up. Both caches
-     have to go: the shared one here and the fetch hook's. */
+     have to go: the shared one here and the fetch hook's.
+
+     Skipped while the tab is in the background — a refresh is a Sheets round
+     trip whose CPU time is billed, and nobody is reading a hidden card. The
+     visibility handler does the one refresh that was missed as soon as the
+     reader comes back. */
   useEffect(() => {
     if (!activeWeek) return;
-    const timer = setInterval(() => {
+
+    const refresh = () => {
       weekCache.current.delete(activeWeek);
       clearApiCache('week_');
       void loadWeek(activeWeek, true);
+    };
+
+    const timer = setInterval(() => {
+      if (document.visibilityState === 'visible') refresh();
     }, 60_000);
-    return () => clearInterval(timer);
+
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') refresh();
+    };
+    document.addEventListener('visibilitychange', onVisible);
+
+    return () => {
+      clearInterval(timer);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
   }, [activeWeek, loadWeek]);
 
   /* ---------- payment ---------- */

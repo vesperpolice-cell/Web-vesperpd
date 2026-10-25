@@ -44,7 +44,11 @@ const LEVEL_STYLE: Record<string, string> = {
   DEBUG: 'border-white/15 bg-white/5 text-ink-dim',
 };
 
-const AUTO_REFRESH_MS = 15_000;
+/* Fluid Active CPU is billed on what these fetches actually spend, and a log
+   page left open all afternoon is the one thing here that polls on its own.
+   A minute is fast enough for a debug view and costs a quarter of what 15s
+   did — the tab also stops polling entirely while it is in the background. */
+const AUTO_REFRESH_MS = 60_000;
 
 interface ViewRow {
   at: string;
@@ -227,10 +231,26 @@ export function LogsClient() {
     void load();
   }, [gate.allowed, load]);
 
+  /* A hidden tab asks nobody's question. The interval below skips the fetch
+     while the page is in the background and the visibility handler catches the
+     table up the moment the reader comes back — same freshness when it is being
+     read, no Sheets round trip when it is not. */
   useEffect(() => {
     if (!auto || !gate.allowed) return;
-    const id = setInterval(() => loadRef.current(), AUTO_REFRESH_MS);
-    return () => clearInterval(id);
+
+    const id = setInterval(() => {
+      if (document.visibilityState === 'visible') loadRef.current();
+    }, AUTO_REFRESH_MS);
+
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') loadRef.current();
+    };
+    document.addEventListener('visibilitychange', onVisible);
+
+    return () => {
+      clearInterval(id);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
   }, [auto, gate.allowed]);
 
   const toggleLevel = (level: Level) =>
