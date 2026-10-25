@@ -30,7 +30,7 @@
  */
 
 import { config } from '@/server/config';
-import { getSheets } from './googleAuth';
+import { getSheets } from './sheetsApi';
 import { ApiError } from '@/server/errors';
 
 export type LogLevel = 'INFO' | 'WARN' | 'ERROR';

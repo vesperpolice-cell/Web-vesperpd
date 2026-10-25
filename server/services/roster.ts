@@ -3,7 +3,7 @@
    I=days J=lastDuty K=lastTime L=duration M=steam N=status/reason */
 
 import { config } from '@/server/config';
-import { getSheets } from './googleAuth';
+import { getSheets } from './sheetsApi';
 import { invalidate } from './cache';
 import { ApiError } from '@/server/errors';
 

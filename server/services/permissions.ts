@@ -23,7 +23,7 @@
 import { config } from '@/server/config';
 import { ApiError } from '@/server/errors';
 import { cached } from './cache';
-import { getSheets } from './googleAuth';
+import { getSheets } from './sheetsApi';
 import { readSessionUserId } from './session';
 
 export interface PermissionSource {

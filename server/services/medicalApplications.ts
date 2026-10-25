@@ -9,7 +9,7 @@
    later without every column having to move along. */
 
 import { config } from '@/server/config';
-import { getSheets } from './googleAuth';
+import { getSheets } from './sheetsApi';
 import { findLatestSubmission, type ApplicationSheet } from './applicationSheet';
 
 const STATUS_PENDING = 'รอตรวจ';

@@ -6,7 +6,7 @@
    kept the message id — it is found from the account they are signed in as.
    The two sheets differ only in which columns those are. */
 
-import { getSheets } from './googleAuth';
+import { getSheets } from './sheetsApi';
 
 export interface ApplicationSheet {
   readonly spreadsheetId: string;

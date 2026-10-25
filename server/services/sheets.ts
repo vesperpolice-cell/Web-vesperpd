@@ -2,7 +2,7 @@
 
 import { config } from '@/server/config';
 import { cached, invalidate } from './cache';
-import { getSheets } from './googleAuth';
+import { getSheets } from './sheetsApi';
 import { parseCSV, mapOfficers, mapWeekData, mapWeekNames } from './csv';
 import type {
   CaseItem,
@@ -264,7 +264,9 @@ export async function markOfficerAsPaid(weekName: string, officerName: string) {
   const fuzzy: number[] = [];
 
   for (let i = DATA_START_ROW_INDEX; i < rows.length; i++) {
-    const cellValue = normalizeOfficerName(rows[i]?.[0] ?? '');
+    // Cells read back as strings, numbers or booleans; the name column may be
+    // either a text cell or a number someone typed into it.
+    const cellValue = normalizeOfficerName(String(rows[i]?.[0] ?? ''));
     if (!cellValue) continue;
 
     if (cellValue === searchName) exact.push(i + 1);
