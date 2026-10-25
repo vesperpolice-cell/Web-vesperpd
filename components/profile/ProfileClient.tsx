@@ -4,10 +4,8 @@ import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { queries, mutations } from '@/lib/client/queries';
-import { clearApiCache } from '@/lib/client/api';
 import { useAdminGate } from '@/lib/client/adminAccess';
 import { useDiscordAuth } from '@/lib/client/useDiscordAuth';
-import { findOfficerWeekData, isOfficerMatch } from '@/lib/format';
 import { SiteFooter } from '@/components/SiteHeader';
 import { AdminGateModal, ConfirmModal, CopyButton } from '@/components/ui/Modal';
 import { DiscordStatus } from '@/components/ui/DiscordStatus';
@@ -15,8 +13,8 @@ import { useToast } from '@/components/ui/Toast';
 import { Loading } from '@/components/ui/States';
 import { WeekSelector } from './WeekSelector';
 import { DutyTable, WeekStats } from './WeekStats';
-import { toWeekStatus, type WeekStatus } from './types';
-import type { Officer, WeekData, WeekOfficerData } from '@/lib/types';
+import type { WeekStatus } from './types';
+import type { Officer } from '@/lib/types';
 
 const PAYMENT_TIMEOUT_MS = 10_000;
 
@@ -25,6 +23,9 @@ interface Totals {
   take2: number;
   interrogations: number;
 }
+
+/** Whatever `/officer-summary` answers — typed from the server, not restated. */
+type Summary = Awaited<ReturnType<typeof queries.officerSummary>>;
 
 export function ProfileClient() {
   const searchParams = useSearchParams();
@@ -37,8 +38,6 @@ export function ProfileClient() {
   const [totals, setTotals] = useState<Totals | null>(null);
 
   const [activeWeek, setActiveWeek] = useState<string | null>(null);
-  const [weekData, setWeekData] = useState<WeekOfficerData | null>(null);
-  const [weekLoading, setWeekLoading] = useState(false);
 
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
@@ -58,117 +57,70 @@ export function ProfileClient() {
      override whatever comes back. */
   const paidThisSession = useRef<Set<string>>(new Set());
 
-  /* One request per week, shared by the status sweep and the week the officer
-     is looking at. Without it the visible week is fetched twice on open and
-     again every time it is revisited — the slowest part of this page is the
-     number of Sheets round trips, not any one of them. The promise is cached
-     rather than the result, so callers that arrive together share a request. */
-  const weekCache = useRef(new Map<string, Promise<WeekData>>());
+  /* The last answer from `/officer-summary`, kept whole: the week list, the
+     totals and the row behind whichever week is open all come from it, so the
+     page never fetches a week on its own. */
+  const [summary, setSummary] = useState<Summary | null>(null);
 
-  const fetchWeek = useCallback((week: string): Promise<WeekData> => {
-    const inFlight = weekCache.current.get(week);
-    if (inFlight) return inFlight;
+  /* Committed in one go: setting state per week would re-render the page as
+     many times as there are weeks. */
+  const applySummary = useCallback((next: Summary) => {
+    setSummary(next);
 
-    const pending = queries.weekData(week).catch((error: unknown) => {
-      // A failure must not be cached, or the week can never recover.
-      weekCache.current.delete(week);
-      throw error;
-    });
-
-    weekCache.current.set(week, pending);
-    return pending;
-  }, []);
-
-  /* ---------- initial load ---------- */
-
-  useEffect(() => {
-    if (!officerName) {
+    if (!next.officer) {
       setNotFound(true);
       setLoading(false);
       return;
     }
 
-    let active = true;
+    setOfficer(next.officer);
+    setWeeks(next.weeks.map((w) => w.week));
+    setTotals(next.totals);
+    setStatuses(
+      Object.fromEntries(
+        next.weeks.map((w) =>
+          paidThisSession.current.has(w.week)
+            ? [w.week, { state: 'paid' as const, amount: 0 }]
+            : [w.week, { state: w.state, amount: w.amount }]
+        )
+      )
+    );
+    setLoading(false);
+  }, []);
 
-    (async () => {
-      try {
-        const [officers, weekNames] = await Promise.all([queries.officers(), queries.weeks()]);
-        if (!active) return;
+  /* ---------- load ---------- */
 
-        const match = officers.find(
-          (o) => isOfficerMatch(o.fullName, officerName) || isOfficerMatch(o.name, officerName)
-        );
-
-        if (!match) {
-          setNotFound(true);
-          setLoading(false);
-          return;
-        }
-
-        setOfficer(match);
-        setWeeks(weekNames);
-        setStatuses(
-          Object.fromEntries(weekNames.map((w) => [w, { state: 'loading', amount: 0 }]))
-        );
-        setActiveWeek(weekNames[0] ?? null);
+  /* One request for the whole page: every week's state, the totals across them
+     and the row for each week. `silent` is for the background poll, where the
+     page must not drop back to a spinner and must keep what it has if the
+     request fails. */
+  const loadSummary = useCallback(
+    async (silent = false) => {
+      if (!officerName) {
+        setNotFound(true);
         setLoading(false);
+        return;
+      }
+
+      try {
+        const next = await queries.officerSummary(officerName);
+        applySummary(next);
+        if (next.officer) setActiveWeek((prev) => prev ?? next.weeks[0]?.week ?? null);
       } catch {
-        if (active) {
+        // The first load has nothing to fall back to; a refresh does.
+        if (!silent) {
           setNotFound(true);
           setLoading(false);
         }
       }
-    })();
-
-    return () => {
-      active = false;
-    };
-  }, [officerName]);
-
-  /* ---------- per-week status + cumulative totals ---------- */
-
-  const refreshStatuses = useCallback(async () => {
-    if (weeks.length === 0 || !officerName) return;
-
-    const running: Totals = { cases: 0, take2: 0, interrogations: 0 };
-
-    /* Collected first and committed once. Setting state per week would
-       re-render the page as many times as there are weeks. */
-    const resolved = await Promise.all(
-      weeks.map(async (week): Promise<[string, WeekStatus]> => {
-        if (paidThisSession.current.has(week)) {
-          return [week, { state: 'paid', amount: 0 }];
-        }
-
-        try {
-          const data = await fetchWeek(week);
-          const entry = findOfficerWeekData(data, officerName);
-
-          if (entry) {
-            running.cases += parseInt(entry.totalCases, 10) || 0;
-            running.take2 += parseInt(entry.take2, 10) || 0;
-            running.interrogations += parseInt(entry.interrogations, 10) || 0;
-          }
-
-          return [
-            week,
-            entry
-              ? toWeekStatus(entry.paid, Number(entry.totalAmount) || 0)
-              : { state: 'unpaid-zero', amount: 0 },
-          ];
-        } catch {
-          return [week, { state: 'error', amount: 0 }];
-        }
-      })
-    );
-
-    setStatuses((prev) => ({ ...prev, ...Object.fromEntries(resolved) }));
-    setTotals(running);
-  }, [weeks, officerName, fetchWeek]);
+    },
+    [officerName, applySummary]
+  );
 
   useEffect(() => {
-    void refreshStatuses();
-  }, [refreshStatuses]);
+    void loadSummary();
+  }, [loadSummary]);
+
 
   /* Unpaid weeks with a balance start checked, matching v2. */
   useEffect(() => {
@@ -181,64 +133,37 @@ export function ProfileClient() {
 
   /* ---------- active week ---------- */
 
-  /* `silent` is for the background poll: swapping a filled card for a spinner
-     every minute reads as the page breaking, so a refresh leaves what is on
-     screen alone and only replaces it once the new figures arrive. Switching
-     weeks is not silent — there the spinner is the honest answer. */
-  const loadWeek = useCallback(
-    async (week: string, silent = false) => {
-      if (!officerName) return;
-      if (!silent) setWeekLoading(true);
+  /* Switching weeks reads the row that came with the summary — there is no
+     per-week request left to make, so the card changes on the same tick as the
+     selector instead of showing a spinner. */
+  const weekData = useMemo(() => {
+    const entry = summary?.weeks.find((w) => w.week === activeWeek)?.entry ?? null;
+    if (entry && activeWeek && paidThisSession.current.has(activeWeek)) {
+      return { ...entry, paid: 'จ่ายแล้ว' };
+    }
+    return entry;
+  }, [summary, activeWeek]);
 
-      try {
-        const data = await fetchWeek(week);
-        const entry = findOfficerWeekData(data, officerName);
-
-        if (entry && paidThisSession.current.has(week)) entry.paid = 'จ่ายแล้ว';
-        setWeekData(entry);
-      } catch {
-        if (!silent) setWeekData(null);
-      } finally {
-        if (!silent) setWeekLoading(false);
-      }
-    },
-    [officerName, fetchWeek]
-  );
-
-  useEffect(() => {
-    if (activeWeek) void loadWeek(activeWeek);
-  }, [activeWeek, loadWeek]);
-
-  /* Poll the active week so a payment made elsewhere shows up. Both caches
-     have to go: the shared one here and the fetch hook's.
+  /* Poll the summary so a payment made elsewhere shows on the card and in the
+     week list at once.
 
      Skipped while the tab is in the background — a refresh is a Sheets round
      trip whose CPU time is billed, and nobody is reading a hidden card. The
      visibility handler does the one refresh that was missed as soon as the
      reader comes back. */
   useEffect(() => {
-    if (!activeWeek) return;
-
     const refresh = () => {
-      weekCache.current.delete(activeWeek);
-      clearApiCache('week_');
-      void loadWeek(activeWeek, true);
+      if (document.visibilityState === 'visible') void loadSummary(true);
     };
 
-    const timer = setInterval(() => {
-      if (document.visibilityState === 'visible') refresh();
-    }, 60_000);
-
-    const onVisible = () => {
-      if (document.visibilityState === 'visible') refresh();
-    };
-    document.addEventListener('visibilitychange', onVisible);
+    const timer = setInterval(refresh, 60_000);
+    document.addEventListener('visibilitychange', refresh);
 
     return () => {
       clearInterval(timer);
-      document.removeEventListener('visibilitychange', onVisible);
+      document.removeEventListener('visibilitychange', refresh);
     };
-  }, [activeWeek, loadWeek]);
+  }, [loadSummary]);
 
   /* ---------- payment ---------- */
 
@@ -334,11 +259,9 @@ export function ProfileClient() {
         return next;
       });
       setSelected(new Set());
-      weekCache.current.clear();
-      clearApiCache('week_');
       // Silent: the toast already reported the result, and paidThisSession
       // has the card showing "จ่ายแล้ว" — a spinner here would only flicker.
-      if (activeWeek) void loadWeek(activeWeek, true);
+      void loadSummary(true);
     }
 
     setPaying(false);
@@ -557,11 +480,7 @@ export function ProfileClient() {
           )}
         </section>
 
-        {weekLoading ? (
-          <Loading />
-        ) : (
-          activeWeek && <WeekStats weekName={activeWeek} data={weekData} />
-        )}
+        {activeWeek && <WeekStats weekName={activeWeek} data={weekData} />}
 
         <section>
           <h3 className="mb-3 text-sm font-bold text-ink">ตารางเวร (จันทร์-อาทิตย์)</h3>

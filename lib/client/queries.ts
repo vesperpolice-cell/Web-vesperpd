@@ -29,6 +29,11 @@ export const queries = {
 
   weekData: (name: string) => unwrap(client.api['week-data'].get({ query: { name } })),
 
+  /** Every week's state, the totals, and each week's row — for one officer, in
+      one request. The profile page used to ask for `/week-data` per week. */
+  officerSummary: (name: string) =>
+    unwrap(client.api['officer-summary'].get({ query: { name } })),
+
   weekTop10: () => unwrap(client.api['week-top10'].get()),
 
   scheduleConfig: () => unwrap(client.api['schedule-config'].get()),
