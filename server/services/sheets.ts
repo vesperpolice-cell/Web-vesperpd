@@ -22,11 +22,16 @@ function normalizeOfficerName(name: string): string {
     .toLowerCase();
 }
 
-/** Google's GViz CSV export — used for the large read-only sheets. */
+/** Google's GViz CSV export — used for the large read-only sheets.
+ *
+ * No cache-busting `_t=` any more: every read goes through services/cache.ts,
+ * which decides how stale an answer may be and can be dropped by tag when the
+ * sheet changes. A timestamp in the URL would make each read a different
+ * resource, which is exactly what stops Google's own edge from helping. */
 async function fetchGvizCSV(sheetId: string, sheetName: string): Promise<string> {
   const url =
     `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq` +
-    `?tqx=out:csv&tq&sheet=${encodeURIComponent(sheetName)}&_t=${Date.now()}`;
+    `?tqx=out:csv&tq&sheet=${encodeURIComponent(sheetName)}`;
 
   const res = await fetch(url, {
     cache: 'no-store',

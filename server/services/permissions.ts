@@ -147,7 +147,10 @@ function allowlist(source: PermissionSource): Promise<Allowlist> {
     if (result.problem) console.warn(`[permissions] ${source.name}: ${result.problem}`);
 
     return result;
-  });
+    /* Instance-only on purpose: a shared entry would keep an id that has just
+       been removed from the sheet working until it expired, and revocation is
+       the one thing here that has to take effect immediately. */
+  }, { shared: false });
 }
 
 /**

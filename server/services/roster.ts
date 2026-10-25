@@ -4,6 +4,7 @@
 
 import { config } from '@/server/config';
 import { getSheets } from './googleAuth';
+import { invalidate } from './cache';
 import { ApiError } from '@/server/errors';
 
 export const EXIT_REASONS = [
@@ -102,6 +103,11 @@ export async function updateStatusMany(rows: number[], status: string): Promise<
       })),
     },
   });
+
+  /* NamePD is also what `/officers` reads, through the GViz export rather than
+     this API. Without this the public roster keeps showing yesterday's status
+     until its cache expires. */
+  invalidate('officers');
 }
 
 export const updateStatus = (row: number, status: string) => updateStatusMany([row], status);
@@ -186,6 +192,7 @@ export async function moveToOutDC(row: number, reason: ExitReason) {
     requestBody: { ranges: vacatedRanges(row) },
   });
 
+  invalidate('officers');
   return { code, name, discordId };
 }
 
@@ -293,6 +300,7 @@ export async function moveManyToOutDC(
     requestBody: { ranges: members.flatMap((m) => vacatedRanges(m.row)) },
   });
 
+  invalidate('officers');
   return members;
 }
 
