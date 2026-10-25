@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-```bash
+``bash
 npm run dev        # next dev
 npm run build      # next build — run before assuming a change is deployable
 npm run typecheck  # tsc --noEmit — the fastest correctness check
