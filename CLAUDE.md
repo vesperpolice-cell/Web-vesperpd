@@ -18,6 +18,15 @@ There is no test suite. `typecheck`, `lint` and a build are the only automated v
 
 `next dev` holds file handles on Windows: a `git mv` of a watched directory fails with `EACCES` until the dev server is stopped. Stale `.next` output after moving routes produces a misleading `Cannot find module for page: /x` at build time — delete `.next` and rebuild before investigating further.
 
+## Accounts and ownership — not negotiable
+
+This project belongs to **`vesperpolice-cell`** and to nothing else. Two rules, both of which have already been broken once:
+
+1. **Commits are authored as `vesperpolice-cell <vesperpolice@gmail.com>` and pushed to `github.com/vesperpolice-cell/Web-vesperpd`.** No other account may appear as author or committer. `git config user.name` / `user.email` are set per repository for this reason — the machine's global config points at `lonewolf259999-cell <vesperpolice@gmail.com>`, a mismatch that produced five commits credited to the wrong account (`0ad34f2`, `7a8e79f`, `b5f585e`, `8c08753`, `2e123d5`). Never rely on the global values here; check `git config --get user.email` before committing. `.git/hooks/pre-push` refuses any remote outside `vesperpolice-cell`.
+2. **The Vercel project is owned by `vesperpolice-cell` alone.** No other personal account and no shared team may own, co-own or be handed the project — a deployment is a claim on the domain and the environment variables, so ownership is the only access control that matters. Anyone else needs to be a viewer, never an owner.
+
+GitHub resolves commit authorship by **email**, not by name, which is why one mismatch shows up as a `vesperpolice-cell` commit labelled with another account's name. It also means the address is public here: this repository is **public**, so any email in a commit is world-readable. Keep the commit email one that is already public, and never commit a file whose secrets the build would normally inject.
+
 ## Architecture
 
 ### Elysia runs inside Next.js, not beside it
